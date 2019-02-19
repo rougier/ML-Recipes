@@ -28,12 +28,10 @@ contribute an example (recipe should be less than 200 lines, including usage).
 
 ### [Artificial Neural Network (ANN)](https://en.wikipedia.org/wiki/Artificial_neural_network)
 
-* Perceptron ([recipes/ANN/perceptron.py](recipes/ANN/perceptron.py))
+* Adaptive Resonance Theory  ([recipes/ANN/art.py](recipes/ANN/art.py))
 
-  > Rosenblatt, Frank (1958), "The Perceptron: A Probabilistic Model for
-  > Information Storage and Organization in the Brain", Cornell Aeronautical
-  > Laboratory, Psychological Review, v65, No. 6,
-  > pp. 386–408. DOI:[10.1037/h0042519](http://doi.org/10.1037/h0042519)
+  > Grossberg, Stephen (1987). Competitive learning: From interactive
+  > activation to adaptive resonance, Cognitive Science, 11, 23-63.
 
 * Multi-Layer Perceptron ([recipes/ANN/mlp.py](recipes/ANN/mlp.py))
 
@@ -42,6 +40,13 @@ contribute an example (recipe should be less than 200 lines, including usage).
   > McClelland, James L., and the PDP research group. (editors), Parallel
   > distributed processing: Explorations in the microstructure of cognition,
   > Volume 1: Foundation. MIT Press, 1986.
+
+* Perceptron ([recipes/ANN/perceptron.py](recipes/ANN/perceptron.py))
+
+  > Rosenblatt, Frank (1958), "The Perceptron: A Probabilistic Model for
+  > Information Storage and Organization in the Brain", Cornell Aeronautical
+  > Laboratory, Psychological Review, v65, No. 6,
+  > pp. 386–408. DOI:[10.1037/h0042519](http://doi.org/10.1037/h0042519)
 
 * Self Organizing Map ([recipes/ANN/som.py](recipes/ANN/som.py))
   > References: Kohonen, Teuvo. Self-Organization and Associative
