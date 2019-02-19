@@ -42,3 +42,7 @@ contribute an example (recipe should be less than 200 lines, including usage).
   > McClelland, James L., and the PDP research group. (editors), Parallel
   > distributed processing: Explorations in the microstructure of cognition,
   > Volume 1: Foundation. MIT Press, 1986.
+
+* Self Organizing Map ([recipes/ANN/som.py](recipes/ANN/som.py))
+  > References: Kohonen, Teuvo. Self-Organization and Associative
+  > Memory. Springer, Berlin, 1984.
