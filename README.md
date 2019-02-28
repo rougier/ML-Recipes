@@ -63,5 +63,6 @@ contribute an example (recipe should be reasonably small, including usage).
   > pp. 386–408. DOI:[10.1037/h0042519](http://doi.org/10.1037/h0042519)
 
 * **Self Organizing Map** ([recipes/ANN/som.py](recipes/ANN/som.py))
-  > References: Kohonen, Teuvo. Self-Organization and Associative
-  > Memory. Springer, Berlin, 1984.
+
+  > Kohonen, Teuvo. Self-Organization and Associative Memory. Springer, Berlin,
+  > 1984.
