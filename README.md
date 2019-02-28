@@ -33,6 +33,12 @@ contribute an example (recipe should be less than 200 lines, including usage).
   > Grossberg, Stephen (1987). Competitive learning: From interactive
   > activation to adaptive resonance, Cognitive Science, 11, 23-63.
 
+* Echo State Network ([recipes/ANN/esn.py](recipes/ANN/esn.py))
+
+  > Jaeger, Herbert (2001) The "echo state" approach to analysing and training
+  > recurrent neural networks. GMD Report 148, GMD - German National Research
+  > Institute for Computer Science.
+
 * Multi-Layer Perceptron ([recipes/ANN/mlp.py](recipes/ANN/mlp.py))
 
   > Rumelhart, David E., Hinton, Geoffrey E. and Williams, Ronald J. "Learning
