@@ -39,6 +39,11 @@ contribute an example (recipe should be less than 200 lines, including usage).
   > recurrent neural networks. GMD Report 148, GMD - German National Research
   > Institute for Computer Science.
 
+* Long Short Term Memory ([nicodjimenez/lstm](https://github.com/nicodjimenez/lstm))
+
+ > Hochreiter, Sepp and Schmidhuber, Jürgen (1997) Long Short-Term Memory,
+ > Neural Computation Vol. 9, 1735-1780
+
 * Multi-Layer Perceptron ([recipes/ANN/mlp.py](recipes/ANN/mlp.py))
 
   > Rumelhart, David E., Hinton, Geoffrey E. and Williams, Ronald J. "Learning
