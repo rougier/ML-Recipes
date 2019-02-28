@@ -42,6 +42,11 @@ contribute an example (recipe should be reasonably small, including usage).
   > recurrent neural networks. GMD Report 148, GMD - German National Research
   > Institute for Computer Science.
 
+* **Simple Recurrent Network** ([recipes/ANN/srn.py](recipes/ANN/srn.py))
+
+  > Elman, Jeffrey L. (1990). Finding structure in time. Cognitive Science,
+  > 14:179–211.
+
 * **Long Short Term Memory** ([nicodjimenez/lstm](https://github.com/nicodjimenez/lstm))
 
   > Hochreiter, Sepp and Schmidhuber, Jürgen (1997) Long Short-Term Memory,
