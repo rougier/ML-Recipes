@@ -1,3 +1,6 @@
+
+<a href="https://xkcd.com/1838/"><img src="xkcd.png" align="right"/></a>
+
 # Machine Learning Recipes
 
 This is a collection of stand-alone Python examples of machine learning
