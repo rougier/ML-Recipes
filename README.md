@@ -2,7 +2,7 @@
 
 This is a collection of stand-alone Python examples of machine learning
 algorithms. Run a specific recipe to see usage and result. Feel free to
-contribute an example (recipe should be less than 200 lines, including usage).
+contribute an example (recipe should be reasonably small, including usage).
 
 ### [Multi-armed bandit (MAB)](https://en.wikipedia.org/wiki/Multi-armed_bandit)
 
