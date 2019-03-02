@@ -71,3 +71,11 @@ contribute an example (recipe should be reasonably small, including usage).
 
   > Kohonen, Teuvo. Self-Organization and Associative Memory. Springer, Berlin,
   > 1984.
+
+
+### [Markov Decision Process (MDP)](https://en.wikipedia.org/wiki/Markov_decision_process)
+
+* **Value Iteration**  ([recipes/MDP/value-iteration.py](recipes/MDP/value-iteration.py))
+
+  > Bellman, Richard (1957). "A Markovian Decision Process". Journal of
+  > Mathematics and Mechanics. 6.
