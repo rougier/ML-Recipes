@@ -32,6 +32,7 @@ class VotedPerceptron:
     def learn(self, input_sample, output_sample, lrate):
         ''' The learning function : a single sample is expected '''
         self.input[1:] = input_sample
+
         # Compute the prediction with the most recently created perceptron
         o = np.sign(np.dot(self.weights[-1,:,:], self.input))
         if o == output_sample:
