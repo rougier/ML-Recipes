@@ -12,9 +12,6 @@ import numpy as np
 import perceptron
 
 # WIP : Online algorithm of Fig. 1
-# We should get rid of the dependance to perceptron just by
-#  hosting our own weights .. which implies a growing 3D numpy array of weigths
-# That way we can vectorize and make the algorithm much faster
 
 class VotedPerceptron:
 
@@ -23,30 +20,35 @@ class VotedPerceptron:
 
         self.n = n
         self.m = m
+        self.input  = np.ones(n+1)
+        self.output = np.ones(m)
         self.reset()
 
     def reset(self):
         ''' Cleans up the learned perceptrons '''
-        self.perceptrons = [perceptron.Perceptron(self.n, self.m)]
-        self.perceptrons[-1].reset()
-        self.votes = [0]
+        self.weights = np.zeros((1, self.m, self.n+1))
+        self.votes = np.zeros((1,))
 
     def learn(self, input_sample, output_sample, lrate):
         ''' The learning function : a single sample is expected '''
-        o = self.perceptrons[-1].propagate_forward(input_sample)
+        self.input[1:] = input_sample
+        # Compute the prediction with the most recently created perceptron
+        o = np.sign(np.dot(self.weights[-1,:,:], self.input))
         if o == output_sample:
+            # Increase the confidence in this perceptron
             self.votes[-1] += 1
         else:
             # Create a new perceptron
-            self.perceptrons.append(perceptron.Perceptron(self.n, self.m))
-            self.votes.append(0)
+            self.weights = np.vstack([self.weights, np.zeros((1, self.m, self.n+1))])
+            self.weights[-1, ...] = self.weights[-2, ...] + output_sample * self.input
+            self.votes   = np.vstack([self.votes  , 1])
+
 
     def __call__(self, input_sample):
         ''' Prediction step '''
-        s = 0
-        for ck, pk in zip(self.votes, self.perceptrons):
-            s += ck * (2 * pk.propagate_forward(input_sample) - 1)
-        return s > 0
+        self.input[1:] = input_sample
+        outputs = np.sign(np.dot(self.weights, self.input))
+        return np.sign(np.sum(outputs * self.votes))
 
 # -----------------------------------------------------------------------------
 if __name__ == '__main__':
@@ -59,7 +61,7 @@ if __name__ == '__main__':
         # Test
         for i in range(samples.size):
             o = network(samples['input'][i])
-            print(i, samples['input'][i], '%.2f' % o[0],
+            print(i, samples['input'][i], '%.2f' % o,
                   '(expected %.2f)' % samples['output'][i])
 
 
