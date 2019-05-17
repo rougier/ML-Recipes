@@ -6,6 +6,8 @@
 #             foundations of the potential function method in pattern
 #             recognition learning.." Paper presented at the meeting of the
 #             Automation and Remote Control,, 1964.
+# The algorithm is described p. 825 though some kernels get introduced latter
+# in history.
 # -----------------------------------------------------------------------------
 
 import numpy as np
