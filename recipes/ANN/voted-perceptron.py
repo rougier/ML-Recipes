@@ -19,10 +19,7 @@ class VotedPerceptron:
         self.m = m
         self.input  = np.ones(n+1)
         self.output = np.ones(m)
-        self.reset()
 
-    def reset(self):
-        ''' Cleans up the learned perceptrons '''
         self.weights = np.zeros((1, self.m, self.n+1))
         self.votes = np.zeros((1,))
 
@@ -99,7 +96,6 @@ if __name__ == '__main__':
     # Example 2 : AND logical function
     # -------------------------------------------------------------------------
     print("Learning the AND logical function")
-    network.reset()
     samples[0] = (0,0), -1
     samples[1] = (1,0), -1
     samples[2] = (0,1), -1
@@ -110,7 +106,6 @@ if __name__ == '__main__':
     # Example 3 : XOR logical function
     # -------------------------------------------------------------------------
     print("Failed at learning the XOR logical function")
-    network.reset()
     samples[0] = (0,0), -1
     samples[1] = (1,0), +1
     samples[2] = (0,1), +1
@@ -121,7 +116,6 @@ if __name__ == '__main__':
     # Example 4 : Blobs
     # -------------------------------------------------------------------------
     print("Learning the blobs dataset")
-    network.reset()
     train_samples = make_blobs(50)
     test_samples  = make_blobs(500)
 
