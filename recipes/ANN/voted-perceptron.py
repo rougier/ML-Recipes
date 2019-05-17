@@ -6,18 +6,14 @@
 #             the perceptron algorithm". In: 11th Annual Conference on
 #             Computational Learning Theory, New York, NY, 209-217, 1998.
 #             DOI:10.1023/A:1007662407062
+# Online algorithm of Fig. 1 in the cited reference
 # -----------------------------------------------------------------------------
 import numpy as np
-
-import perceptron
-
-# WIP : Online algorithm of Fig. 1
 
 class VotedPerceptron:
 
     def __init__(self, n, m):
         ''' Initialization of the voted perceptron with given sizes.  '''
-
         self.n = n
         self.m = m
         self.input  = np.ones(n+1)
@@ -29,7 +25,7 @@ class VotedPerceptron:
         self.weights = np.zeros((1, self.m, self.n+1))
         self.votes = np.zeros((1,))
 
-    def learn(self, input_sample, output_sample, lrate):
+    def learn(self, input_sample, output_sample):
         ''' The learning function : a single sample is expected '''
         self.input[1:] = input_sample
 
@@ -54,11 +50,11 @@ class VotedPerceptron:
 # -----------------------------------------------------------------------------
 if __name__ == '__main__':
 
-    def learn(network,samples, epochs=250, lrate=.1, momentum=0.1):
+    def learn(network, samples, epochs=250):
         # Train
         for i in range(epochs):
             n = np.random.randint(samples.size)
-            network.learn(samples['input'][n], samples['output'][n], lrate)
+            network.learn(samples['input'][n], samples['output'][n])
         # Test
         for i in range(samples.size):
             o = network(samples['input'][i])
@@ -73,32 +69,28 @@ if __name__ == '__main__':
     # -------------------------------------------------------------------------
     print("Learning the OR logical function")
     network.reset()
-    samples[0] = (0,0), 0
-    samples[1] = (1,0), 1
-    samples[2] = (0,1), 1
-    samples[3] = (1,1), 1
+    samples[0] = (0,0), -1
+    samples[1] = (1,0), +1
+    samples[2] = (0,1), +1
+    samples[3] = (1,1), +1
     learn(network, samples)
 
     # Example 2 : AND logical function
     # -------------------------------------------------------------------------
     print("Learning the AND logical function")
     network.reset()
-    samples[0] = (0,0), 0
-    samples[1] = (1,0), 0
-    samples[2] = (0,1), 0
-    samples[3] = (1,1), 1
+    samples[0] = (0,0), -1
+    samples[1] = (1,0), -1
+    samples[2] = (0,1), -1
+    samples[3] = (1,1), +1
     learn(network, samples)
 
     # Example 3 : XOR logical function
     # -------------------------------------------------------------------------
     print("Failed at learning the XOR logical function")
     network.reset()
-    samples[0] = (0,0), 0
-    samples[1] = (1,0), 1
-    samples[2] = (0,1), 1
-    samples[3] = (1,1), 0
+    samples[0] = (0,0), -1
+    samples[1] = (1,0), +1
+    samples[2] = (0,1), +1
+    samples[3] = (1,1), -1
     learn(network, samples)
-
-    # Example 4 : Large dimensional space
-    # -------------------------------------------------------------------------
-    print("Everything is linearly separable in large dimensional space :)")
