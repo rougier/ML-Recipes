@@ -67,6 +67,13 @@ contribute an example (recipe should be reasonably small, including usage).
   > Laboratory, Psychological Review, v65, No. 6,
   > pp. 386–408. DOI:[10.1037/h0042519](http://doi.org/10.1037/h0042519)
 
+* **Voted Perceptron** ([recipes/ANN/voted-perceptron.py](recipes/ANN/voted-perceptron.py))
+
+  > Y. Freund, R. E. Schapire. "Large margin classification using
+  > the perceptron algorithm". In: 11th Annual Conference on
+  > Computational Learning Theory, New York, NY, 209-217, 1998.
+  > DOI:[10.1023/A:1007662407062](http://doi.org/10.1023/A:1007662407062)
+
 * **Self Organizing Map** ([recipes/ANN/som.py](recipes/ANN/som.py))
 
   > Kohonen, Teuvo. Self-Organization and Associative Memory. Springer, Berlin,
