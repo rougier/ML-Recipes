@@ -67,6 +67,13 @@ contribute an example (recipe should be reasonably small, including usage).
   > Laboratory, Psychological Review, v65, No. 6,
   > pp. 386–408. DOI:[10.1037/h0042519](http://doi.org/10.1037/h0042519)
 
+* **Kernel perceptron** ([recipes/ANN/kernel-perceptron.py](recipes/ANN/kernel-perceptron.py))
+
+  > Aizerman, M. A., Braverman, E. A. and Rozonoer, L.. " Theoretical
+  > foundations of the potential function method in pattern 
+  > recognition learning.." Paper presented at the meeting of the
+  > Automation and Remote Control,, 1964.
+
 * **Voted Perceptron** ([recipes/ANN/voted-perceptron.py](recipes/ANN/voted-perceptron.py))
 
   > Y. Freund, R. E. Schapire. "Large margin classification using
