@@ -53,6 +53,8 @@ class PCA:
         #self.eigvals = eigvals[-self.n_components:]
         #self.eigvecs = eigvecs[:, -self.n_components:]
 
+        # Stores all the eigenvectors/eigenvalues
+        # Usefull for latter computing some statistics of the variance we keep
         self.eigvals = eigvals
         self.eigvecs = eigvecs
 
@@ -78,7 +80,7 @@ if __name__ == '__main__':
 
     N = 500
 
-    # Generate some random normal data rotated and translated
+    ## Generate some random normal data rotated and translated
     X = np.column_stack([np.random.normal(0.0, 1.0, (N, )),
                          np.random.normal(0.0, 0.2, (N, ))])
     X = np.dot(X, np.array([[np.cos(1.0), np.sin(1.0)],[-np.sin(1.0), np.cos(1.0)]]))
@@ -90,6 +92,7 @@ if __name__ == '__main__':
     pca = PCA(n_components=n_components)
     pca.fit(X)
 
+    ## Project the original data
     X_trans = pca.transform(X)
 
     print("{}% of the variance along the first axis (green)".format(
