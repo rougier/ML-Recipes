@@ -95,10 +95,10 @@ if __name__ == '__main__':
     ## Project the original data
     X_trans = pca.transform(X)
 
-    print("{}% of the variance along the first axis (green)".format(
+    print("{:.2f}% of the variance along the first axis (green)".format(
           100 * pca.eigvals[-1] / pca.eigvals.sum()))
 
-    print("{}% of the variance along the second axis (red)".format(
+    print("{:.2f}% of the variance along the second axis (red)".format(
           100 * pca.eigvals[-2] / pca.eigvals.sum()))
 
     ## Plot
@@ -115,6 +115,8 @@ if __name__ == '__main__':
     plt.xlim([-3, 3])
     plt.ylim([-3, 3])
     plt.gca().set_aspect('equal')
+    plt.savefig("random_points.png")
+    print()
 
     # Example 2 : 28 x 28 images of digits
     # -------------------------------------------------------------------------
@@ -132,7 +134,7 @@ if __name__ == '__main__':
     ## Project the original data
     X_trans = pca.transform(X)
 
-    print("{}% of the variance is kept with {} components".format(
+    print("{:.2f}% of the variance is kept with {} components".format(
           100 * pca.eigvals[-n_components:].sum()/pca.eigvals.sum(),
           n_components))
 
@@ -161,4 +163,5 @@ if __name__ == '__main__':
         ax.set_xticks([])
         ax.set_yticks([])
 
+    plt.savefig("digits.png")
     plt.show()
