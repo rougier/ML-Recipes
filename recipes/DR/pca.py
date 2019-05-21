@@ -7,7 +7,21 @@
 #            doi:10.1080/14786440109462720
 # -----------------------------------------------------------------------------
 import numpy as np
+
 import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+import matplotlib.cm as cmx
+import matplotlib.colors as colors
+
+def get_cmap(N):
+    '''Returns a function that maps each index in 0, 1, ... N-1 to a distinct
+        RGB color.'''
+    color_norm  = colors.Normalize(vmin=0, vmax=N)
+    scalar_map = cmx.ScalarMappable(norm=color_norm, cmap='hsv')
+    def map_index_to_rgb_color(index):
+        return scalar_map.to_rgba(index)
+    return map_index_to_rgb_color
+
 
 class PCA:
     ''' PCA class '''
@@ -36,8 +50,11 @@ class PCA:
 
         # Stores the n_components eigvenvectors/eigenvalues associated
         # with the largest eigen values
-        self.eigvals = eigvals[-self.n_components:]
-        self.eigvecs = eigvecs[:, -self.n_components:]
+        #self.eigvals = eigvals[-self.n_components:]
+        #self.eigvecs = eigvecs[:, -self.n_components:]
+
+        self.eigvals = eigvals
+        self.eigvecs = eigvecs
 
     def transform(self, Z):
         '''
@@ -48,33 +65,47 @@ class PCA:
         The second component is Z_trans[:, -2]
         ...
         '''
-        print((Z-self.centroid).shape, self.eigvecs.shape)
-        return np.dot(Z - self.centroid, self.eigvecs)
+        return np.dot(Z - self.centroid, self.eigvecs[:, -self.n_components:])
 
 
 if __name__ == '__main__':
 
+
+    # Example 1 : Random 2D data
+    # -------------------------------------------------------------------------
+    print("Random data example")
+    print('-' * 70)
+
     N = 500
+
     # Generate some random normal data rotated and translated
     X = np.column_stack([np.random.normal(0.0, 1.0, (N, )),
                          np.random.normal(0.0, 0.2, (N, ))])
     X = np.dot(X, np.array([[np.cos(1.0), np.sin(1.0)],[-np.sin(1.0), np.cos(1.0)]]))
     X = np.array([0.5, 1.0]) + X
 
-    # Computes the PCA
-    pca = PCA(n_components=2)
+    ## Extract the 2 first principal component vectors
+    ## With a 2D dataset, these are the only interesting components
+    n_components = 2
+    pca = PCA(n_components=n_components)
     pca.fit(X)
 
     X_trans = pca.transform(X)
 
-    # Plot
+    print("{}% of the variance along the first axis (green)".format(
+          100 * pca.eigvals[-1] / pca.eigvals.sum()))
+
+    print("{}% of the variance along the second axis (red)".format(
+          100 * pca.eigvals[-2] / pca.eigvals.sum()))
+
+    ## Plot
     plt.figure()
     plt.scatter(X[:,0], X[:,1])
-    # First axis
+    ## Plot the first projecton axis in green
     plt.plot([pca.centroid[0]-2*pca.eigvecs[0, -1], pca.centroid[0]+2*pca.eigvecs[0,-1]],
              [pca.centroid[1]-2*pca.eigvecs[1, -1], pca.centroid[1]+2*pca.eigvecs[1,-1]],
              'g', linewidth=3)
-    # Second axis
+    ## Plot the second projection axis in red
     plt.plot([pca.centroid[0]-2*pca.eigvecs[0, 0], pca.centroid[0]+2*pca.eigvecs[0,0]],
              [pca.centroid[1]-2*pca.eigvecs[1, 0], pca.centroid[1]+2*pca.eigvecs[1,0]],
              'r', linewidth=3)
@@ -82,8 +113,49 @@ if __name__ == '__main__':
     plt.ylim([-3, 3])
     plt.gca().set_aspect('equal')
 
+    # Example 2 : 28 x 28 images of digits
+    # -------------------------------------------------------------------------
+    print("Digits example")
+    print('-' * 70)
 
-    plt.figure()
-    plt.scatter(X_trans[:, -1], X_trans[:, -2])
+    samples = np.load('dig_app_text.cb.npy')
+    X, y = samples['input'], samples['label']
+
+    ## Extract the 10 first principal component vectors
+    n_components = 10
+    pca = PCA(n_components = n_components)
+    pca.fit(X)
+
+    ## Project the original data
+    X_trans = pca.transform(X)
+
+    print("{}% of the variance is kept with {} components".format(
+          100 * pca.eigvals[-n_components:].sum()/pca.eigvals.sum(),
+          n_components))
+
+    ## Plot
+    fig = plt.figure(figsize=(10,4), tight_layout=True)
+    gs  = GridSpec(3, 10)
+
+    ### Coordinates in the projected space
+    ### the color shows how the digits get separated by the principal vectors
+    ax = fig.add_subplot(gs[0:2, :-2])
+    cmap = get_cmap(10)
+    ax.scatter(X_trans[:, -1], X_trans[:,-2] , c=[cmap(l) for l in y])
+    ax = fig.add_subplot(gs[0:2, -2:])
+    ax.set_axis_off()
+    for i in range(10):
+        col = cmap(i)
+        rect = plt.Rectangle((0.1, i/10.), 0.4, 1.0/14., facecolor=col)
+        ax.add_artist(rect)
+        ax.text(0.6, i/10.+1./28., str(i), fontsize=12, color="k", **{'ha':'center', 'va':'center'})
+
+
+    ### Projection vectors
+    for i in range(n_components):
+        ax = fig.add_subplot(gs[2, i])
+        ax.imshow(pca.eigvecs[:, -(i+1)].reshape((28, 28)), cmap='gray_r')
+        ax.set_xticks([])
+        ax.set_yticks([])
 
     plt.show()
