@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
     ## Plot
     plt.figure()
-    plt.scatter(X[:,0], X[:,1])
+    plt.scatter(X[:,0], X[:,1], alpha = .25)
     ## Plot the first projecton axis in green
     plt.plot([pca.centroid[0]-2*pca.eigvecs[0, -1], pca.centroid[0]+2*pca.eigvecs[0,-1]],
              [pca.centroid[1]-2*pca.eigvecs[1, -1], pca.centroid[1]+2*pca.eigvecs[1,-1]],
@@ -146,7 +146,7 @@ if __name__ == '__main__':
     ### the color shows how the digits get separated by the principal vectors
     ax = fig.add_subplot(gs[0:2, :-2])
     cmap = get_cmap(10)
-    ax.scatter(X_trans[:, -1], X_trans[:,-2] , c=[cmap(l) for l in y])
+    ax.scatter(X_trans[:, -1], X_trans[:,-2] , c=[cmap(l) for l in y], alpha = .25)
     ax = fig.add_subplot(gs[0:2, -2:])
     ax.set_axis_off()
     for i in range(10):
