@@ -93,3 +93,12 @@ contribute an example (recipe should be reasonably small, including usage).
 
   > Bellman, Richard (1957). "A Markovian Decision Process". Journal of
   > Mathematics and Mechanics. 6.
+
+### [Dimensionality Reduction (DR)](https://en.wikipedia.org/wiki/Dimensionality_reduction)
+
+* **Principal Component Analysis** ([recipes/DR/pca.py](recipes/DR/pca.py))
+
+  > Pearson, K. (1901). "On Lines and Planes of Closest Fit to Systems
+  > of Points in Space". Philosophical Magazine. 2 (11): 559–572.
+  > DOI:[10.1080/14786440109462720](http://doi.org/10.1080/14786440109462720)
+
