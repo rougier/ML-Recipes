@@ -3,8 +3,8 @@
 # Released under a BSD two-clauses license
 #
 # Reference:  TODO
-# Dataset : Olivetti faces TODO
-
+# Dataset : Database of faces from AT&T Laboratories Cambridge
+#           https://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html
 # -----------------------------------------------------------------------------
 import numpy as np
 
@@ -34,14 +34,14 @@ class EigenFace:
 
 if __name__ == '__main__':
 
-    # Example 1 : 400 x (64 , 64) Olivetti face dataset
-    # We have much more dimensions (4096) than samples (400), a situation
-    # where computing the PCA with eigenface is advantageous
+    # Example 1 : 400 x (92, 112) Olivetti face dataset
+    # We have much more dimensions (10304) than samples (400), a situation
+    # where computing the PCA from the Gramm matrix is advantageous
     # -------------------------------------------------------------------------
-    print("Olivetti faces example")
+    print("AT&T faces dataset example")
     print('-' * 70)
 
-    samples = np.load('dig_app_text.cb.npy')
+    samples = np.load('att_faces.npy')
     X = samples['input']
 
     ## Extract the 10 first principal component vectors
