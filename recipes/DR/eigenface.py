@@ -58,7 +58,7 @@ class EigenFace:
 
 if __name__ == '__main__':
 
-    # Example 1 : 400 x (92, 112) Olivetti face dataset
+    # Example 1 : 400 x (112, 92) Olivetti face dataset
     # We have much more dimensions (10304) than samples (400), a situation
     # where computing the PCA from the Gramm matrix is advantageous
     # -------------------------------------------------------------------------
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     X, y = samples['input'], samples['label']
 
     ## Extract the 15 first principal component vectors
-    n_components = 15
+    n_components = 10
     eigenface = EigenFace(n_components = n_components)
     eigenface.fit(X)
 
@@ -98,6 +98,7 @@ if __name__ == '__main__':
 
     ### Show some samples ordered by 1st principal component
     idx_sorted_by_1st_pc = np.argsort(X_trans[:,-1])
+    plt.savefig('eigenface.png')
 
     ### Select a subset of equally spaced images ordered by increasing
     ### first PC
@@ -113,4 +114,5 @@ if __name__ == '__main__':
         ax.set_yticks([])
     plt.suptitle('Few samples ordered by 1st PC')
 
+    plt.savefig('eigenface_samples_1st.png')
     plt.show()
