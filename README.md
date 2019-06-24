@@ -102,3 +102,9 @@ contribute an example (recipe should be reasonably small, including usage).
   > of Points in Space". Philosophical Magazine. 2 (11): 559–572.
   > DOI:[10.1080/14786440109462720](http://doi.org/10.1080/14786440109462720)
 
+* **Eigenface** ([recipes/DR/eigenface.py](recipes/DR/eigenface.py))
+
+  > M. Turk & A. Pentland (1991) Eigenfaces for Recognition.
+  > Journal of cognitive neuroscience, 3(1): 71-86.
+  > DOI:[10.1162/jocn.1991.3.1.71](https://doi.org/10.1162/jocn.1991.3.1.71)
+
