@@ -111,17 +111,12 @@ def get_bird_distances(cities):
 
     return np.array(distances)
 
+    return distances
+
+
 if __name__ == '__main__':
 
-    # A dummy example
-    d = np.array([[0, 1, 1], [1, 0, 2], [2, 0.5, 0]])
-
-    mds = ClassicalMDS(2)
-    embedding, error = mds.embed(d)
-
-    plt.figure()
-    plt.scatter(embedding[:, 0], embedding[:, 1])
-    plt.show()
+    mds = ClassicalMDS(n_components=2)
 
     # Example with cities distances and traveling distances
     cities = ['Paris, France', 'Lyon, France',
@@ -131,3 +126,34 @@ if __name__ == '__main__':
               'Koln, Germany', 'Frankfurt am Main, Germany',
               'Amsterdam, Netherlands', 'Brussel, Belgium']
 
+    # Compute the embeddings from the geodesic distance
+    # as the earth is "flat", we expect a low error
+    geodesic_distances = get_geodesic_distances(cities)
+    embeddings_geodesic, error_geodesic = mds.embed(geodesic_distances)
+
+    car_distances = get_car_distances(cities)
+    embeddings_car, error_car = mds.embed(car_distances)
+
+    # Plot the embeddings
+    fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    ax = axs[0]
+    ax.scatter(embeddings_geodesic[:, 1], embeddings_geodesic[:, 0])
+    for ci, c in enumerate(cities):
+        ax.annotate(c.split(',')[0],
+                    (embeddings_geodesic[ci, 1], embeddings_geodesic[ci, 0]),
+                    xycoords="data", xytext=(0, 10),
+                    textcoords='offset points', ha="center")
+    ax.set_title(f"Bird. Reconstruction error {error_geodesic:4.2f}%")
+
+    ax = axs[1]
+    ax.scatter(embeddings_car[:, 1], embeddings_car[:, 0])
+    for ci, c in enumerate(cities):
+        ax.annotate(c.split(',')[0], (embeddings_car[ci, 1], embeddings_car[ci, 0]),
+                    xycoords="data", xytext=(0, 10),
+                    textcoords='offset points', ha="center")
+    ax.set_title(f"Car. Reconstruction error {error_car:4.2f}%")
+
+    plt.suptitle("Multidimensional scaling")
+    plt.savefig("classical_mds.png", bbox_inches='tight')
+    plt.show()
