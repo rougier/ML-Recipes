@@ -102,15 +102,15 @@ def get_bird_distances(cities):
     locations = []
     # Request the longitudes and latitudes of the cities
     for city in tqdm.tqdm(cities):
+        geocity = geocoder.osm(f"{city}")
+        locations.append((geocity.osm['y'], geocity.osm['x']))
 
-    distances = []
-    for l1 in locations:
-        d = []
-        for l2 in locations:
-            d.append(geodesic(l1, l2).kilometers)
-        distances.append(d)
-
-    return np.array(distances)
+    # Compute the geodesic distance between each pair of cities
+    distances = np.zeros((len(cities), len(cities)))
+    for i, l1 in enumerate(locations):
+        for j, l2 in enumerate(locations[i+1:]):
+            distances[i, i+j+1] = geodesic(l1, l2).kilometers
+            distances[i+j+1, i] = distances[i, i+j+1]
 
     return distances
 
