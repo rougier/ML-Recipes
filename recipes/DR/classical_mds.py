@@ -87,7 +87,7 @@ def get_car_distances(cities):
     url=f"http://router.project-osrm.org/table/v1/car/{cities_long_lat}?annotations=distance"
     yml_file = urllib.request.urlopen(url)
     yml_data = yaml.safe_load(yml_file)
-    distances = np.array(yml_data['distances'])
+    distances = np.array(yml_data['distances'])/1000.
 
     return distances
 
