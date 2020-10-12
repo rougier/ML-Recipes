@@ -76,11 +76,13 @@ def get_car_distances(cities):
         a matrix of car distances between each pair of cities
     '''
     locations = []
+    # Request the longitudes and latitudes of the cities
     for city in tqdm.tqdm(cities):
-        g = geocoder.osm(f"{city}")
-        locations.append(f"{g.osm['y']},{g.osm['x']}")
+        geocity = geocoder.osm(f"{city}")
+        locations.append(f"{geocity.osm['y']},{geocity.osm['x']}")
     cities_long_lat = ";".join(locations)
 
+    # Using osrm to get the travel distance by car
     url=f"http://router.project-osrm.org/table/v1/car/{cities_long_lat}?annotations=distance"
 
     yml_file = urllib.request.urlopen(url)
@@ -98,9 +100,8 @@ def get_bird_distances(cities):
         a matrix of geodesic distances between each pair of cities
     '''
     locations = []
+    # Request the longitudes and latitudes of the cities
     for city in tqdm.tqdm(cities):
-        g = geocoder.osm(f"{city}")
-        locations.append((g.osm['y'], g.osm['x']))
 
     distances = []
     for l1 in locations:
