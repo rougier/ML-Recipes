@@ -108,3 +108,9 @@ contribute an example (recipe should be reasonably small, including usage).
   > Journal of cognitive neuroscience, 3(1): 71-86.
   > DOI:[10.1162/jocn.1991.3.1.71](https://doi.org/10.1162/jocn.1991.3.1.71)
 
+* **Classical Multidimensional scaling** ([recipes/DR/classical_mds.py](recipes/DR/classical_mds.py))
+
+  > W.S. Torgerson (1952) Multidimensional sacling: I. Theory and method
+  > Psychometrika, 17: 401-419
+  > DOI:[10.1007/BF02288916](https://doi.org/10.1007/BF02288916)
+
