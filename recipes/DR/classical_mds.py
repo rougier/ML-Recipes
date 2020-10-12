@@ -35,7 +35,7 @@ class ClassicalMDS:
         # Compute the Gram Matrix
         # by double centering the squared disimilarities
         n = delta.shape[0]
-        H = np.eye(n) - 1/n * np.ones_like(d)
+        H = np.eye(n) - 1/n * np.ones_like(delta)
         G = -1./2. * H@(delta**2)@H
 
         # Compute the square root of the Gram matrix
