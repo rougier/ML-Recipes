@@ -9,8 +9,13 @@
 #           https://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html
 # -----------------------------------------------------------------------------
 
+import geocoder
+from geopy.distance import geodesic
 import matplotlib.pyplot as plt
 import numpy as np
+import tqdm
+import urllib
+import yaml
 
 
 class ClassicalMDS:
@@ -19,6 +24,14 @@ class ClassicalMDS:
         self.n_components = n_components
 
     def embed(self, delta):
+        '''
+        Arguments:
+            delta: square matrix of dissimilarities
+
+        Returns:
+            embeddings : a N x d matrix of the embeddings in the rows
+            error : the reconstruction error (in 0%-100%)
+        '''
         # Compute the Gram Matrix
         # by double centering the squared disimilarities
         n = delta.shape[0]
@@ -29,26 +42,24 @@ class ClassicalMDS:
         eigval, eigvec = np.linalg.eigh(G)
 
         if np.any(eigval < 0):
-            print('''[WARNING] Some eigenvalues are non positive.
-                  The computed reconstruction error only includes the positive
-                  eigenvalues
-                  ''')
+            print("[WARNING] Some eigenvalues are non positive."
+                  " The computed reconstruction error only includes"
+                  " the positive eigenvalues")
 
         # It might be the eigenvalues are not all negative
         eigval[eigval < 0] = 0
 
         if np.any(eigval[-self.n_components:] < 0):
-            print(f'''[ERROR] You want me to select {self.n_components}
-                       but only {(eigval>0).sum()} are positive
-                  ''')
+            print(f"[ERROR] You want me to select {self.n_components}"
+                  f" but only {(eigval>0).sum()} are positive")
 
         # The eigenvalues are ordered by increasing values
         # We keep the two largest
         embeddings = eigvec[:, -self.n_components:]
         eigvals = eigval[-self.n_components:]
 
-        print(f'''Reconstruction error :
-              {(1. - eigvals.sum()/eigval.sum())*100} %")''')
+        print("Reconstruction error : "
+              f"{(1. - eigvals.sum()/eigval.sum())*100} %")
 
         for i in range(self.n_components):
             embeddings[:, i] *= np.sqrt(eigvals[i])
@@ -56,9 +67,40 @@ class ClassicalMDS:
         return embeddings[:, ::-1], (1 - eigvals.sum()/eigval.sum())*100
 
 
+def get_car_distances(cities):
+    locations = []
+    for city in tqdm.tqdm(cities):
+        g = geocoder.osm(f"{city}")
+        locations.append(f"{g.osm['y']},{g.osm['x']}")
+    cities_long_lat = ";".join(locations)
+
+    url=f"http://router.project-osrm.org/table/v1/car/{cities_long_lat}?annotations=distance"
+
+    yml_file = urllib.request.urlopen(url)
+    yml_data = yaml.safe_load(yml_file)
+    distances = np.array(yml_data['distances'])
+    return distances
+
+
+def get_bird_distances(cities):
+    locations = []
+    for city in tqdm.tqdm(cities):
+        g = geocoder.osm(f"{city}")
+        locations.append((g.osm['y'], g.osm['x']))
+
+    distances = []
+    for l1 in locations:
+        d = []
+        for l2 in locations:
+            d.append(geodesic(l1, l2).kilometers)
+        distances.append(d)
+
+    return np.array(distances)
+
 if __name__ == '__main__':
 
-    d = np.array([[0, 1, 2], [1, 0, 2], [2, 2, 0]])
+    # A dummy example
+    d = np.array([[0, 1, 1], [1, 0, 2], [2, 0.5, 0]])
 
     mds = ClassicalMDS(2)
     embedding, error = mds.embed(d)
@@ -66,3 +108,12 @@ if __name__ == '__main__':
     plt.figure()
     plt.scatter(embedding[:, 0], embedding[:, 1])
     plt.show()
+
+    # Example with cities distances and traveling distances
+    cities = ['Paris, France', 'Lyon, France',
+              'Lille, France', 'Strasbourg, France',
+              'Toulon, France', 'Clermont-Ferrand, France',
+              'Nancy, France', 'Orléans, France',
+              'Koln, Germany', 'Frankfurt am Main, Germany',
+              'Amsterdam, Netherlands', 'Brussel, Belgium']
+
