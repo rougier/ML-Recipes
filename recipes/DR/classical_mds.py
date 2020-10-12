@@ -6,8 +6,6 @@
 # Reference: W.S. Torgerson (1952)
 #            Multidimensional scaling: I. Theory and method.
 #            Psychometrika, 17: 401-419.
-# Dataset : Database of faces from AT&T Laboratories Cambridge
-#           https://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html
 # -----------------------------------------------------------------------------
 
 import urllib
