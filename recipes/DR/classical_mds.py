@@ -1,3 +1,4 @@
+# coding: utf-8
 # -----------------------------------------------------------------------------
 # Copyright 2020 (C) Jeremy Fix
 # Released under a BSD two-clauses license
@@ -84,10 +85,10 @@ def get_car_distances(cities):
 
     # Using osrm to get the travel distance by car
     url=f"http://router.project-osrm.org/table/v1/car/{cities_long_lat}?annotations=distance"
-
     yml_file = urllib.request.urlopen(url)
     yml_data = yaml.safe_load(yml_file)
     distances = np.array(yml_data['distances'])
+
     return distances
 
 
