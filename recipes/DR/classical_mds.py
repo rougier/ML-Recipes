@@ -9,12 +9,12 @@
 #           https://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html
 # -----------------------------------------------------------------------------
 
+import urllib
 import geocoder
 from geopy.distance import geodesic
 import matplotlib.pyplot as plt
 import numpy as np
 import tqdm
-import urllib
 import yaml
 
 
