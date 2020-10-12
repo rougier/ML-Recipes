@@ -68,6 +68,13 @@ class ClassicalMDS:
 
 
 def get_car_distances(cities):
+    '''
+    Arguments:
+        cities: list of cities as str
+
+    Returns:
+        a matrix of car distances between each pair of cities
+    '''
     locations = []
     for city in tqdm.tqdm(cities):
         g = geocoder.osm(f"{city}")
@@ -83,6 +90,13 @@ def get_car_distances(cities):
 
 
 def get_bird_distances(cities):
+    '''
+    Arguments:
+        cities: list of cities as str
+
+    Returns:
+        a matrix of geodesic distances between each pair of cities
+    '''
     locations = []
     for city in tqdm.tqdm(cities):
         g = geocoder.osm(f"{city}")
