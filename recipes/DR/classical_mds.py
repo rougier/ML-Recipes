@@ -146,7 +146,7 @@ if __name__ == '__main__':
                     (embeddings_geodesic[ci, 1], embeddings_geodesic[ci, 0]),
                     xycoords="data", xytext=(0, 10),
                     textcoords='offset points', ha="center")
-    ax.set_title(f"Bird. Reconstruction error {error_geodesic:4.2f}%")
+    ax.set_title(f"Geodesic. Reconstruction error {error_geodesic:4.2f}%")
 
     ax = axs[1]
     ax.scatter(embeddings_car[:, 1], embeddings_car[:, 0])
