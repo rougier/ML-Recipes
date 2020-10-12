@@ -91,7 +91,7 @@ def get_car_distances(cities):
     return distances
 
 
-def get_bird_distances(cities):
+def get_geodesic_distances(cities):
     '''
     Arguments:
         cities: list of cities as str
