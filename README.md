@@ -110,7 +110,7 @@ contribute an example (recipe should be reasonably small, including usage).
 
 * **Classical Multidimensional scaling** ([recipes/DR/classical_mds.py](recipes/DR/classical_mds.py))
 
-  > W.S. Torgerson (1952) Multidimensional sacling: I. Theory and method
+  > W.S. Torgerson (1952) Multidimensional scaling: I. Theory and method
   > Psychometrika, 17: 401-419
   > DOI:[10.1007/BF02288916](https://doi.org/10.1007/BF02288916)
 
