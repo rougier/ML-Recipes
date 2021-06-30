@@ -25,7 +25,7 @@ W_rc *= radius / np.max(np.abs(np.linalg.eigvals(W_rc)))
 
 # Get data
 data = np.load('mackey-glass.npy')
-train_data = data[:2000,np.newaxis]
+train_data = data[:2000,np.newaxis].ravel()
 test_data = data[2000:4000,np.newaxis]
 
 # Run & collect extended states (input + reservoir)
